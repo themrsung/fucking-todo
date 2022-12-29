@@ -11,7 +11,7 @@ import {
 export default function App() {
     return (
         <SafeAreaView>
-            <View>
+            <View style={{ flexDirection: "row" }}>
                 <Button title="JS"></Button>
                 <Button title="React"></Button>
                 <Button title="Coding Test"></Button>
@@ -20,9 +20,9 @@ export default function App() {
                 <TextInput>Enter your fucking todo</TextInput>
             </View>
             <View>
-                <View>
+                <View style={{ flexDirection: "row" }}>
                     <Text>FUCKING TODO</Text>
-                    <View>
+                    <View style={{ flexDirection: "row" }}>
                         <Button title="Check"></Button>
                         <Button title="Edit"></Button>
                         <Button title="Delete"></Button>
@@ -32,12 +32,3 @@ export default function App() {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center"
-    }
-})
