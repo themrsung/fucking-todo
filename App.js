@@ -40,16 +40,6 @@ export default function App() {
         setFuckingTodos(todos)
     }
 
-    const toggleFuckingTodo = (id) => {
-        let todos = fuckingTodos
-        todos.forEach((t) => {
-            if (t.id === id) {
-                t.isDone = !t.isDone
-            }
-        })
-        setFuckingTodos(todos)
-    }
-
     return (
         <SafeAreaView style={{ paddingTop: 50 }}>
             <View style={{ flexDirection: "row" }}>
