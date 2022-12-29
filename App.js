@@ -20,6 +20,53 @@ export default function App() {
         }
     ])
 
+    const [todosOne, setTodosOne] = useState([])
+    const [todosTwo, setTodosTwo] = useState([])
+    const [todosThree, setTodosThree] = useState([])
+    const [currentTodoList, setCurrentTodoList] = useState(1)
+
+    const switchTodoList = (list) => {
+        switch (currentTodoList) {
+            case 1:
+                setTodosOne(fuckingTodos)
+                setCurrentTodoList(list)
+                switch (list) {
+                    case 2:
+                        setFuckingTodos(todosTwo)
+                    case 3:
+                        setFuckingTodos(todosThree)
+                    default:
+                        setFuckingTodos(todosOne)
+                }
+
+            case 2:
+                setTodosTwo(fuckingTodos)
+                setCurrentTodoList(list)
+                switch (list) {
+                    case 1:
+                        setFuckingTodos(todosOne)
+                    case 3:
+                        setFuckingTodos(todosThree)
+                    default:
+                        setFuckingTodos(todosTwo)
+                }
+
+            case 3:
+                setTodosThree(fuckingTodos)
+                setCurrentTodoList(list)
+                switch (list) {
+                    case 1:
+                        setFuckingTodos(todosOne)
+                    case 2:
+                        setFuckingTodos(todosTwo)
+                    default:
+                        setFuckingTodos(todosThree)
+                }
+            default:
+                return
+        }
+    }
+
     const [counter, setCounter] = useState(1)
 
     const [newContent, setNewContent] = useState("")
@@ -50,9 +97,25 @@ export default function App() {
     return (
         <SafeAreaView style={{ paddingTop: 50 }}>
             <View style={{ flexDirection: "row" }}>
-                <Button title="JS"></Button>
-                <Button title="React"></Button>
-                <Button title="Coding Test"></Button>
+                <Text>Current Todo List: {currentTodoList}</Text>
+                <Button
+                    title="ONE"
+                    onPress={() => {
+                        switchTodoList(1)
+                    }}
+                ></Button>
+                <Button
+                    title="TWO"
+                    onPress={() => {
+                        switchTodoList(2)
+                    }}
+                ></Button>
+                <Button
+                    title="THREE"
+                    onPress={() => {
+                        switchTodoList(3)
+                    }}
+                ></Button>
             </View>
             <View>
                 <TextInput
