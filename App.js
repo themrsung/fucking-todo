@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar"
+import { useState } from "react"
 import {
     Button,
     SafeAreaView,
@@ -8,25 +9,57 @@ import {
     TextInput,
     View
 } from "react-native"
+import { v4 as uuidFuckYou } from "uuid"
 
 export default function App() {
-    const fuckingTodos = [
+    const [fuckingTodos, setFuckingTodos] = useState([
         {
             id: 0,
-            title: "fuck",
             content: "you",
             isDone: false
         }
-    ]
+    ])
+
+    const [counter, setCounter] = useState(1)
+
+    const [newContent, setNewContent] = useState("")
+
+    const addFuckingTodo = () => {
+        const newTodo = {
+            id: counter,
+            content: newContent,
+            isDone: false
+        }
+        setCounter(counter + 1)
+
+        let todos = fuckingTodos
+        todos.push(newTodo)
+        setFuckingTodos(todos)
+    }
+
+    const toggleFuckingTodo = (id) => {
+        let todos = fuckingTodos
+        todos.forEach((t) => {
+            if (t.id === id) {
+                t.isDone = !t.isDone
+            }
+        })
+        setFuckingTodos(todos)
+    }
+
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ paddingTop: 50 }}>
             <View style={{ flexDirection: "row" }}>
                 <Button title="JS"></Button>
                 <Button title="React"></Button>
                 <Button title="Coding Test"></Button>
             </View>
             <View>
-                <TextInput>Enter your fucking todo</TextInput>
+                <TextInput
+                    value={newContent}
+                    onChangeText={(t) => setNewContent(t)}
+                ></TextInput>
+                <Button title="ADD TODO" onPress={addFuckingTodo}></Button>
             </View>
             <ScrollView>
                 {fuckingTodos.map((fuckYou) => {
@@ -34,6 +67,8 @@ export default function App() {
                         <LasPutasTodo
                             key={fuckYou.id}
                             fuckingTodoAgain={fuckYou}
+                            setFuckingTodos={setFuckingTodos}
+                            allFuckingTodos={fuckingTodos}
                         />
                     )
                 })}
@@ -42,11 +77,15 @@ export default function App() {
     )
 }
 
-const LasPutasTodo = ({ fuckingTodoAgain }) => {
+const LasPutasTodo = ({
+    fuckingTodoAgain,
+    setFuckingTodos,
+    allFuckingTodos
+}) => {
+    const [newTodoContent, setNewTodoContent] = useState("")
     return (
         <View style={{ flexDirection: "row" }}>
             <View>
-                <Text>{fuckingTodoAgain.title}</Text>
                 <Text>{fuckingTodoAgain.content}</Text>
                 <Text>
                     {fuckingTodoAgain.isDone ? "completed" : "not completed"}
@@ -54,9 +93,45 @@ const LasPutasTodo = ({ fuckingTodoAgain }) => {
             </View>
 
             <View style={{ flexDirection: "row" }}>
-                <Button title="Check"></Button>
-                <Button title="Edit"></Button>
-                <Button title="Delete"></Button>
+                <Button
+                    title="Check"
+                    onPress={() => {
+                        let todos = allFuckingTodos.filter(
+                            (t) => t.id !== fuckingTodoAgain.id
+                        )
+                        const newTodo = fuckingTodoAgain
+                        fuckingTodoAgain.isDone = !fuckingTodoAgain.isDone
+                        todos.push(newTodo)
+                        setFuckingTodos(todos)
+                    }}
+                ></Button>
+                <Button
+                    title="Edit"
+                    onPress={() => {
+                        let todos = allFuckingTodos.filter(
+                            (t) => t.id !== fuckingTodoAgain.id
+                        )
+                        const newTodo = fuckingTodoAgain
+                        newTodo.content = newTodoContent
+                        todos.push(newTodo)
+                        setFuckingTodos(todos)
+                    }}
+                ></Button>
+                <TextInput
+                    value={newTodoContent}
+                    onChangeText={(t) => {
+                        setNewTodoContent(t)
+                    }}
+                ></TextInput>
+                <Button
+                    title="Delete"
+                    onPress={() => {
+                        let todos = allFuckingTodos.filter(
+                            (t) => t.id !== fuckingTodoAgain.id
+                        )
+                        setFuckingTodos(todos)
+                    }}
+                ></Button>
             </View>
         </View>
     )
