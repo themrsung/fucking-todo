@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar"
 import {
     Button,
     SafeAreaView,
+    ScrollView,
     StyleSheet,
     Text,
     TextInput,
@@ -19,7 +20,7 @@ export default function App() {
             <View>
                 <TextInput>Enter your fucking todo</TextInput>
             </View>
-            <View>
+            <ScrollView>
                 <View style={{ flexDirection: "row" }}>
                     <Text>FUCKING TODO</Text>
                     <View style={{ flexDirection: "row" }}>
@@ -28,7 +29,15 @@ export default function App() {
                         <Button title="Delete"></Button>
                     </View>
                 </View>
-            </View>
+                <View style={{ flexDirection: "row" }}>
+                    <Text>FUCKING TODO</Text>
+                    <View style={{ flexDirection: "row" }}>
+                        <Button title="Check"></Button>
+                        <Button title="Edit"></Button>
+                        <Button title="Delete"></Button>
+                    </View>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
