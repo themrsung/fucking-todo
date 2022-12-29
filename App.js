@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar"
+import {
+    Button,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View
+} from "react-native"
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <SafeAreaView>
+            <View>
+                <Button title="JS"></Button>
+                <Button title="React"></Button>
+                <Button title="Coding Test"></Button>
+            </View>
+            <View>
+                <TextInput>Enter your fucking todo</TextInput>
+            </View>
+            <View>
+                <View>
+                    <Text>FUCKING TODO</Text>
+                    <View>
+                        <Button title="Check"></Button>
+                        <Button title="Edit"></Button>
+                        <Button title="Delete"></Button>
+                    </View>
+                </View>
+            </View>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
