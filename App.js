@@ -1,4 +1,5 @@
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import {
     Button,
     SafeAreaView,
@@ -9,14 +10,40 @@ import {
 } from "react-native"
 
 export default function App() {
-    const [fuckingTodos, setFuckingTodos] = useState([
-        {
-            id: 0,
-            content: "you",
-            isDone: false,
-            category: 1
+    const SERVER_URL = "https://23859027uv8923vu5892b3v523v.loca.lt"
+    const [fuckingTodos, setFuckingTodos] = useState([])
+
+    const fetchTodos = async () => {
+        const response = await axios.get(SERVER_URL + "/todos")
+        if (response) {
+            setFuckingTodos(response.data.todos)
+            setTodosFetched(true)
         }
-    ])
+    }
+
+    const [todosFetched, setTodosFetched] = useState(false)
+
+    useEffect(() => {
+        if (!todosFetched) {
+            fetchTodos()
+        }
+    }, [])
+
+    const postTodos = async () => {
+        await axios.put(SERVER_URL + "/todos", { todos: fuckingTodos })
+    }
+
+    const [a, setA] = useState(false)
+
+    const update = async () => {
+        setTimeout(() => {
+            postTodos()
+            setA(!a)
+        }, 3000)
+    }
+    useEffect(() => {
+        update()
+    }, [a])
 
     const [currentTodoList, setCurrentTodoList] = useState(1)
 
@@ -26,7 +53,7 @@ export default function App() {
 
     const addFuckingTodo = () => {
         const newTodo = {
-            id: counter,
+            id: Date.now(),
             content: newContent,
             isDone: false,
             category: currentTodoList
@@ -58,6 +85,18 @@ export default function App() {
                     title="THREE"
                     onPress={() => {
                         setCurrentTodoList(3)
+                    }}
+                ></Button>
+                <Button
+                    title="FETCH TODOS"
+                    onPress={() => {
+                        fetchTodos()
+                    }}
+                ></Button>
+                <Button
+                    title="SAVE"
+                    onPress={() => {
+                        postTodos()
                     }}
                 ></Button>
             </View>
